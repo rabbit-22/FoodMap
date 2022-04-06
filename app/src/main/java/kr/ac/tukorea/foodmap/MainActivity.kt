@@ -1,32 +1,20 @@
 package kr.ac.tukorea.foodmap
 
 import android.Manifest
-import android.annotation.SuppressLint
-import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
-import android.graphics.Color
-import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Looper
-import android.util.Log
-import android.widget.Toast
-import androidx.annotation.UiThread
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import com.google.android.gms.location.*
-import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
-import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
-import com.naver.maps.map.util.MarkerIcons
+import kr.ac.tukorea.foodmap.room.AppDatabase
 
 class MainActivity : FragmentActivity(), OnMapReadyCallback {
     val LOCATION_PERMISSION_REQUEST_CODE = 1000
     private lateinit var locationSource: FusedLocationSource
     private lateinit var naverMap: NaverMap
+    val db = AppDatabase.getInstance(applicationContext)
     var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
 
 
@@ -42,7 +30,7 @@ class MainActivity : FragmentActivity(), OnMapReadyCallback {
         }
         mapFragment!!.getMapAsync(this)
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),1)
     }
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
