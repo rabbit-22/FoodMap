@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_map"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_dialog_map"
+        android:title="지도" />
+
+    <item
+        android:id="@+id/tab_list"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_format_list_bulleted_24"
+        android:title="목록" />
+
+    <item
+        android:id="@+id/tab_setting"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="설정" />
+</menu>

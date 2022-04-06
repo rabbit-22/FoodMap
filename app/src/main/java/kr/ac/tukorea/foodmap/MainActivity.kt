@@ -4,24 +4,26 @@ import android.Manifest
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.naver.maps.map.*
 import com.naver.maps.map.util.FusedLocationSource
-import kr.ac.tukorea.foodmap.room.AppDatabase
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : FragmentActivity(), OnMapReadyCallback {
     val LOCATION_PERMISSION_REQUEST_CODE = 1000
     private lateinit var locationSource: FusedLocationSource
     private lateinit var naverMap: NaverMap
-    val db = AppDatabase.getInstance(applicationContext)
+    private val listTab by lazy { TabListFragment() }
+    private val mapTab by lazy { TabMapFragment() }
+    private val settingTab by lazy { TabSettingFragment() }
+//    val db = AppDatabase.getInstance(applicationContext)
     var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val fm: FragmentManager = supportFragmentManager
         var mapFragment: MapFragment? = fm.findFragmentById(R.id.map) as MapFragment?
         if (mapFragment == null) {
@@ -30,8 +32,33 @@ class MainActivity : FragmentActivity(), OnMapReadyCallback {
         }
         mapFragment!!.getMapAsync(this)
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),1)
+        initNavigationBar()
     }
+    private fun initNavigationBar() {
+        bottomNavigationView.run {
+            setOnItemSelectedListener {
+                when(it.itemId) {
+                R.id.tab_map -> { changeFragment(mapTab)
+            }
+                R.id.tab_list -> { changeFragment(listTab)
+                }
+                R.id.tab_setting -> { changeFragment(settingTab)
+                }
+            }
+                true
+            }
+        }
+    }
+
+    private fun changeFragment(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.home_ly, fragment)
+            .commit()
+    }
+
+
+
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
         naverMap!!.locationSource = locationSource
