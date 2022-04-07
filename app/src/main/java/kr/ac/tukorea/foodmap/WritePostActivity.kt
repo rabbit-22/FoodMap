@@ -16,8 +16,8 @@ import java.util.*
 
 
 class WritePostActivity : AppCompatActivity() {
-    var mapX = null
-    var mapY = null
+    var mapX:String? = null
+    var mapY:String? = null
 
     var currentTime:Date = Calendar.getInstance().time
     private lateinit var getResultText: ActivityResultLauncher<Intent>
@@ -31,8 +31,10 @@ class WritePostActivity : AppCompatActivity() {
         wDateTv.setText(current)
         getResultText = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
             if(result.resultCode == RESULT_OK){
-                val rMapX: Intent? = result.data
-                val rMapY: Intent? = result.data
+                val rMapX = result.data?.getStringExtra("x")
+                val rMapY = result.data?.getStringExtra("y")
+                mapX = rMapX.toString()
+                mapY = rMapY.toString()
             }
         }
         wDatell.setOnClickListener{

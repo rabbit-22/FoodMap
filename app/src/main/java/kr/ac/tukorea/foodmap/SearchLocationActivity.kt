@@ -38,7 +38,8 @@ class SearchLocationActivity : AppCompatActivity(), OnMapReadyCallback {
 
         sSaveBt.setOnClickListener{
             val mIntent = Intent(this, WritePostActivity::class.java)
-            mIntent.putExtra(slatLng.latitude.toString(),slatLng.longitude.toString())
+            mIntent.putExtra(slatLng.latitude.toString(),"x")
+            mIntent.putExtra(slatLng.longitude.toString(),"y")
             setResult(Activity.RESULT_OK,mIntent)
             Toast.makeText(this, "위치가 등록되었습니다", Toast.LENGTH_SHORT).show()
             finish()
@@ -46,7 +47,6 @@ class SearchLocationActivity : AppCompatActivity(), OnMapReadyCallback {
     }
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
-        val cameraPosition = naverMap.cameraPosition
         val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.5666102, 126.9783881))
         naverMap.moveCamera(cameraUpdate)
         naverMap!!.locationSource = locationSource
