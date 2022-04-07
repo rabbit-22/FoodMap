@@ -8,9 +8,7 @@ import androidx.room.PrimaryKey
 data class Post(
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "place_title") val placeTitle: String?,
-    @ColumnInfo(name = "last_name") val lastName: String?,
     @ColumnInfo(name = "review") val review: String?,
-    @ColumnInfo(name = "rating") val rating: Float?,
     @ColumnInfo(name = "map_x") val mapX: Int?,
     @ColumnInfo(name = "map_y") val mapY: Int?,
 )

@@ -1,9 +1,11 @@
 package kr.ac.tukorea.foodmap
 
 import android.Manifest
+import android.content.Intent
 import androidx.appcompat.widget.Toolbar
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
@@ -19,8 +21,6 @@ import androidx.fragment.app.FragmentTransaction
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
     val LOCATION_PERMISSION_REQUEST_CODE = 1000
-    private lateinit var locationSource: FusedLocationSource
-    private lateinit var naverMap: NaverMap
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
     var fragment:Fragment = TabMapFragment()
@@ -49,7 +49,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             var fragmentManager:FragmentManager = supportFragmentManager
             fragmentManager.beginTransaction().replace(R.id.content_fragment_layout, fragment).commit()
         }
-
+        fab.setOnClickListener{
+            var intent = Intent(applicationContext, WritePostActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
