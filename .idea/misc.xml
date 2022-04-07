@@ -8,10 +8,13 @@
         <entry key="..\:/Users/keri_/Desktop/FoodMap/app/src/main/res/layout/activity_tab_list.xml" value="0.17135416666666667" />
         <entry key="..\:/Users/keri_/Desktop/FoodMap/app/src/main/res/layout/activity_tab_map.xml" value="0.17135416666666667" />
         <entry key="..\:/Users/keri_/Desktop/FoodMap/app/src/main/res/layout/activity_tab_setting.xml" value="0.17135416666666667" />
+        <entry key="..\:/Users/keri_/Desktop/FoodMap/app/src/main/res/layout/appbar.xml" value="0.264" />
         <entry key="..\:/Users/keri_/Desktop/FoodMap/app/src/main/res/layout/fragment_tab_list.xml" value="0.25" />
         <entry key="..\:/Users/keri_/Desktop/FoodMap/app/src/main/res/layout/fragment_tab_map.xml" value="0.21822916666666667" />
         <entry key="..\:/Users/keri_/Desktop/FoodMap/app/src/main/res/layout/fragment_tab_menu.xml" value="0.25" />
+        <entry key="..\:/Users/keri_/Desktop/FoodMap/app/src/main/res/layout/header.xml" value="0.264" />
         <entry key="..\:/Users/keri_/Desktop/FoodMap/app/src/main/res/menu/menu_bottom.xml" value="0.16354166666666667" />
+        <entry key="..\:/Users/keri_/Desktop/FoodMap/app/src/main/res/menu/menu_list.xml" value="0.4" />
       </map>
     </option>
   </component>
