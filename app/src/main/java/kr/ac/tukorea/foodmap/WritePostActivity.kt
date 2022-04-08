@@ -1,7 +1,6 @@
 package kr.ac.tukorea.foodmap
 
 import android.app.DatePickerDialog
-import android.app.Instrumentation
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,15 +8,18 @@ import android.widget.DatePicker
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import com.naver.maps.geometry.LatLng
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_write_post.*
+import kr.ac.tukorea.foodmap.room.Post
+import kr.ac.tukorea.foodmap.room.PostViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class WritePostActivity : AppCompatActivity() {
-    var mapX:String? = null
-    var mapY:String? = null
+    private lateinit var mPostViewModel: PostViewModel
+    var mapX:Double = 0.0
+    var mapY:Double = 0.0
 
     var currentTime:Date = Calendar.getInstance().time
     private lateinit var getResultText: ActivityResultLauncher<Intent>
@@ -25,16 +27,16 @@ class WritePostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write_post)
-
+        mPostViewModel = ViewModelProvider(this).get(PostViewModel::class.java)
         var format:SimpleDateFormat = SimpleDateFormat("yyyy년 MM월 dd일 ", Locale.getDefault())
         var current:String = format.format(currentTime)
         wDateTv.setText(current)
         getResultText = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
             if(result.resultCode == RESULT_OK){
-                val rMapX = result.data?.getStringExtra("x")
-                val rMapY = result.data?.getStringExtra("y")
-                mapX = rMapX.toString()
-                mapY = rMapY.toString()
+                val rMapX = result.data!!.getDoubleExtra("x",0.0)
+                val rMapY = result.data!!.getDoubleExtra("y",0.0)
+                mapX = rMapX
+                mapY = rMapY
             }
         }
         wDatell.setOnClickListener{
@@ -57,7 +59,7 @@ class WritePostActivity : AppCompatActivity() {
             if(mapX === null){
                 Toast.makeText(this, "위치를 등록해주세요", Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show()
+                insertDataToDatabase()
                 finish()
             }
 
@@ -65,5 +67,14 @@ class WritePostActivity : AppCompatActivity() {
         wBackBt.setOnClickListener{
             finish()
         }
+
     }
+    private fun insertDataToDatabase(){
+        val review = wReviewEt.text.toString()
+        val placeTitle = wPlaceEt.text.toString()
+        val post = Post(0, placeTitle, review, mapX!!.toDouble(), mapY!!.toDouble())
+        mPostViewModel.addPost(post)
+        Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show()
+    }
+
 }

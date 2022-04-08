@@ -5,7 +5,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".TabSettingFragment">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/wToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white">
+    </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
     <LinearLayout
         android:layout_margin="25dp"
         android:layout_width="match_parent"

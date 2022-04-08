@@ -38,8 +38,8 @@ class SearchLocationActivity : AppCompatActivity(), OnMapReadyCallback {
 
         sSaveBt.setOnClickListener{
             val mIntent = Intent(this, WritePostActivity::class.java)
-            mIntent.putExtra(slatLng.latitude.toString(),"x")
-            mIntent.putExtra(slatLng.longitude.toString(),"y")
+            mIntent.putExtra("x",slatLng.latitude)
+            mIntent.putExtra("y",slatLng.longitude)
             setResult(Activity.RESULT_OK,mIntent)
             Toast.makeText(this, "위치가 등록되었습니다", Toast.LENGTH_SHORT).show()
             finish()

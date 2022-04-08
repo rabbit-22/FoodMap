@@ -5,25 +5,28 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Post::class], version = 1)
+@Database(entities = [Post::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun postDao(): PostDao
 
     companion object {
-        private var instance: AppDatabase? = null
+        @Volatile private var INSTANCE: AppDatabase? = null
 
         @Synchronized
-        fun getInstance(context: Context): AppDatabase? {
-            if (instance == null) {
-                synchronized(AppDatabase::class) {
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        AppDatabase::class.java,
-                        "app-database"
-                    ).build()
-                }
+        fun getDatabase(context: Context): AppDatabase? {
+            val tempInstance = INSTANCE
+            if(tempInstance != null){
+                return tempInstance
             }
-            return instance
+            synchronized(this){ //synchronized는 새로운 데이터베이스를 instance시킵니다.
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    "post_database"
+                ).build()
+                INSTANCE = instance
+                return instance
+            }
         }
     }
 }
