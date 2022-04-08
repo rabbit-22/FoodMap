@@ -11,4 +11,5 @@ data class Post(
     @ColumnInfo(name = "review") val review: String?,
     @ColumnInfo(name = "map_x") val mapX: Double?,
     @ColumnInfo(name = "map_y") val mapY: Double?,
+    @ColumnInfo(name = "date") val date: String?,
 )

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rowLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="24sp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded"
+        android:orientation="vertical">
+    <TextView
+        android:id="@+id/placeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/kotrahope"
+        android:textSize="25dp"
+        android:textColor="#746281"
+        android:text="토끼네 초밥집"
+        />
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9C9C9C"
+        android:fontFamily="@font/nanumbarunpenb"
+        android:layout_marginTop="3dp"
+        android:textSize="12dp"
+        android:text="2022년 04월 08일" />
+    <TextView
+        android:id="@+id/review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanumbarunpenb"
+        android:textSize="16dp"
+        android:layout_marginTop="5dp"
+        android:singleLine="true"
+        android:textColor="#6C6C6C"
+        android:text="너무 맛있었다!!@#$@#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

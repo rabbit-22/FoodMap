@@ -31,13 +31,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/kotrahope"
+            android:textSize="20dp"
+
             android:text="총 작성한 지도" />
 
         <TextView
+            android:id="@+id/count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#DFB1FF"
-            android:text="0" />
+            android:layout_marginTop="5dp"
+            android:textSize="20dp"
+            android:fontFamily="@font/kotrahope"
+           />
     </LinearLayout>
 
     <LinearLayout
@@ -51,11 +58,13 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/nanumbarunpenb"
             android:text="Contact" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumbarunpenb"
             android:text="rabbit_72@naver.com" />
     </LinearLayout>
 </LinearLayout>

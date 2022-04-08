@@ -36,6 +36,7 @@
 
                 <TextView
                     android:id="@+id/wDateTv"
+                    android:fontFamily="@font/nanumbarunpenb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#858585" />
@@ -52,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:padding="20dp"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:text="저장"
                 android:textColor="#DFB1FF" />
         </androidx.appcompat.widget.Toolbar>
@@ -69,6 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/nanumbarunpenb"
             android:text="장소"
             android:textColor="#323232" />
 
@@ -84,6 +87,7 @@
                 android:layout_marginTop="3dp"
                 android:layout_weight="1"
                 android:background="@null"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:hint="장소 이름을 입력해주세요"
                 android:minHeight="48dp"
                 android:textSize="15dp" />
@@ -94,8 +98,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:layout_marginRight="10dp"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:layout_weight="0"
-                android:text="위치등록" />
+                android:text="위치 등록" />
         </LinearLayout>
 
         <TextView
@@ -104,6 +109,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="내용"
+            android:fontFamily="@font/nanumbarunpenb"
             android:textColor="#323232" />
 
         <LinearLayout
@@ -118,8 +124,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="3dp"
                 android:background="@null"
-                android:gravity="top
-"
+                android:gravity="top"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:hint="내용을 입력해주세요"
                 android:minHeight="48dp"
                 android:textSize="15dp" />

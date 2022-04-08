@@ -32,6 +32,7 @@
                 android:layout_gravity="end"
                 android:padding="20dp"
                 android:text="등록"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:textColor="#DFB1FF" />
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>

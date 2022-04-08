@@ -28,7 +28,7 @@ class WritePostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write_post)
         mPostViewModel = ViewModelProvider(this).get(PostViewModel::class.java)
-        var format:SimpleDateFormat = SimpleDateFormat("yyyy년 MM월 dd일 ", Locale.getDefault())
+        var format:SimpleDateFormat = SimpleDateFormat("yyyy년 MM월 dd일", Locale.getDefault())
         var current:String = format.format(currentTime)
         wDateTv.setText(current)
         getResultText = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
@@ -72,7 +72,8 @@ class WritePostActivity : AppCompatActivity() {
     private fun insertDataToDatabase(){
         val review = wReviewEt.text.toString()
         val placeTitle = wPlaceEt.text.toString()
-        val post = Post(0, placeTitle, review, mapX!!.toDouble(), mapY!!.toDouble())
+        val date = wDateTv.text.toString()
+        val post = Post(0, placeTitle, review, mapX!!.toDouble(), mapY!!.toDouble(),date)
         mPostViewModel.addPost(post)
         Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show()
     }
