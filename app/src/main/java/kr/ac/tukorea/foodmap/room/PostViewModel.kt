@@ -11,8 +11,9 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class PostViewModel(application: Application): AndroidViewModel(application)  {
+
     val readAllPost: LiveData<List<Post>>
-    var getCount: LiveData<Int>
+    val getCount: LiveData<Int>?
     private val repository: PostRepository
 
     init {

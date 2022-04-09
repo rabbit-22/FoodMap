@@ -2,21 +2,27 @@ package kr.ac.tukorea.foodmap
 
 
 import android.Manifest
-import android.content.DialogInterface
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import kr.ac.tukorea.foodmap.room.AppDatabase
+import kr.ac.tukorea.foodmap.room.Post
+import kr.ac.tukorea.foodmap.room.PostViewModel
 
 
 class TabMapFragment : Fragment(), OnMapReadyCallback {
+    private lateinit var  mPostViewModel: PostViewModel
     val LOCATION_PERMISSION_REQUEST_CODE = 1000
     private lateinit var locationSource: FusedLocationSource
     private lateinit var naverMap: NaverMap
@@ -30,7 +36,6 @@ class TabMapFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val rootView = inflater.inflate(
             R.layout.fragment_tab_map,
             container, false
@@ -38,16 +43,20 @@ class TabMapFragment : Fragment(), OnMapReadyCallback {
         mapView = rootView.findViewById<View>(R.id.navermap) as MapView
         mapView!!.onCreate(savedInstanceState)
         mapView!!.getMapAsync(this)
+        mPostViewModel = ViewModelProvider(this).get(PostViewModel::class.java)
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
         return rootView
     }
-
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
+        this.naverMap.locationSource = locationSource
+
+        mPostViewModel.readAllPost.observe(viewLifecycleOwner, Observer { postList ->
+            drawMarker(postList)
+        })
+        naverMap.locationTrackingMode = LocationTrackingMode.Follow
         naverMap.mapType = NaverMap.MapType.Basic
         naverMap!!.locationSource = locationSource
-        this.naverMap.locationSource = locationSource
-        naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
         val uiSettings = naverMap.uiSettings
         uiSettings.isLocationButtonEnabled = true
@@ -58,7 +67,16 @@ class TabMapFragment : Fragment(), OnMapReadyCallback {
         //건물 표시
         naverMap.setLayerGroupEnabled(NaverMap.LAYER_GROUP_BUILDING, false)
     }
-
+    private fun drawMarker(postList: List<Post>) {
+        postList.forEach { diary ->
+            val marker = Marker()
+            marker.position = LatLng(diary.mapX!!.toDouble(), diary.mapY!!.toDouble())
+            marker.map = naverMap
+            marker.icon =  OverlayImage.fromResource(R.drawable.ic_marker)
+            marker.width = 100
+            marker.height = 100
+        }
+    }
     override fun onStart() {
         var addr: String
         super.onStart()

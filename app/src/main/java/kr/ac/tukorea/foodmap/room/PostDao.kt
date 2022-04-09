@@ -17,6 +17,6 @@ interface PostDao {
     @Query("SELECT * FROM post_table ORDER BY id DESC")
     fun getAll(): LiveData<List<Post>>
 
-    @Query("SELECT count(id) FROM post_table")
-    fun getCount(): LiveData<Int>
+    @Query("SELECT count(*) FROM post_table")
+    fun getCount(): LiveData<Int>?
 }

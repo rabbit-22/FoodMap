@@ -33,11 +33,10 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/kotrahope"
             android:textSize="20dp"
-
             android:text="총 작성한 지도" />
 
         <TextView
-            android:id="@+id/count"
+            android:id="@+id/countTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#DFB1FF"

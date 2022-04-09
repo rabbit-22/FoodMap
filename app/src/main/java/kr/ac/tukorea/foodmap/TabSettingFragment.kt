@@ -9,27 +9,24 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.fragment_tab_setting.*
-import kr.ac.tukorea.foodmap.room.PostDao
-import kr.ac.tukorea.foodmap.room.PostRepository
 import kr.ac.tukorea.foodmap.room.PostViewModel
 
 
 class TabSettingFragment : Fragment() {
-    private lateinit var mUserViewModel: PostViewModel
-    var count = 0
+    private lateinit var mPostViewModel: PostViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
        val view = inflater.inflate(R.layout.fragment_tab_setting, container, false)
-        var id_tv = getView()?.findViewById<TextView>(R.id.count)
-        mUserViewModel = ViewModelProvider(this).get(PostViewModel::class.java)
-        mUserViewModel.getCount.observe(viewLifecycleOwner, Observer { post->
-            id_tv?.setText(post?.toString())
-            count++
+        var count_tv:TextView =  view.findViewById(R.id.countTv);
+        mPostViewModel = ViewModelProvider(this).get(PostViewModel::class.java)
+        mPostViewModel.getCount!!.observe(viewLifecycleOwner, Observer { count ->
+            count_tv.text = count.toString()
+            Log.d("test",count.toString())
         })
-       return view
+        return view
     }
 
 }
