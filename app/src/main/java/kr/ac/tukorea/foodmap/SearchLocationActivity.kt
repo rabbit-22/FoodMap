@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -36,7 +37,10 @@ class SearchLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         mapFragment!!.getMapAsync(this)
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-        Toast.makeText(this, "해당 위치를 클릭해주세요", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "", Toast.LENGTH_LONG)
+        val toast = Toast.makeText(this, "해당하는 위치를 클릭하세요", Toast.LENGTH_SHORT)
+        toast.setGravity(Gravity.CENTER, 0, 0)
+        toast.show()
         sSaveBt.setOnClickListener{
             val mIntent = Intent(this, WritePostActivity::class.java)
             mIntent.putExtra("x",slatLng.latitude)

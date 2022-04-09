@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -59,6 +60,7 @@ class WritePostActivity : AppCompatActivity() {
         wSaveBt.setOnClickListener {
             if(mapX === null){
                 Toast.makeText(this, "위치를 등록해주세요", Toast.LENGTH_SHORT).show()
+
             }else{
                 insertDataToDatabase()
                 finish()
@@ -76,7 +78,10 @@ class WritePostActivity : AppCompatActivity() {
         val date = wDateTv.text.toString()
         val post = Post(0, placeTitle, review, mapX!!.toDouble(), mapY!!.toDouble(),date)
         mPostViewModel.addPost(post)
-        Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show()
+        val toast = Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT)
+        toast.setGravity(Gravity.BOTTOM, 0, 0)
+        toast.show()
+
     }
 
     override fun onBackPressed() {

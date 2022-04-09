@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
     var fragment:Fragment = TabMapFragment()
-    var title: String = "FoodMap"
+    var title: String = "Food Map"
 //    val db = AppDatabase.getInstance(applicationContext)
     var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
 
