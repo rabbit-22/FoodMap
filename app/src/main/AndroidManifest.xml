@@ -15,6 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodMap">
         <activity
+            android:name=".DetailPostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchLocationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WritePostActivity"
+            android:exported="false" />
+        <activity
             android:name=".TabMapActivity"
             android:exported="false" />
         <activity

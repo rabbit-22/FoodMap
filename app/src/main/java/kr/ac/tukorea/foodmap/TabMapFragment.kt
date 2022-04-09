@@ -2,6 +2,7 @@ package kr.ac.tukorea.foodmap
 
 
 import android.Manifest
+import android.content.Intent
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -75,7 +76,21 @@ class TabMapFragment : Fragment(), OnMapReadyCallback {
             marker.icon =  OverlayImage.fromResource(R.drawable.ic_marker)
             marker.width = 100
             marker.height = 100
+
+            marker.setOnClickListener {
+                val intent = Intent(getActivity(), DetailPostActivity::class.java)
+                intent.putExtra("id", diary.id)
+                intent.putExtra("date", diary.date)
+                intent.putExtra("review", diary.review)
+                intent.putExtra("mapX", diary.mapX)
+                intent.putExtra("mapY", diary.mapY)
+                intent.putExtra("placeTitle", diary.placeTitle)
+                startActivity(intent)
+                true
+            }
         }
+
+
     }
     override fun onStart() {
         var addr: String
