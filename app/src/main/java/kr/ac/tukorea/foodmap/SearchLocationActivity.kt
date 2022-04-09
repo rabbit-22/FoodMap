@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import kotlinx.android.synthetic.main.activity_search_location.*
 
@@ -35,13 +36,16 @@ class SearchLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         mapFragment!!.getMapAsync(this)
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-
+        Toast.makeText(this, "해당 위치를 클릭해주세요", Toast.LENGTH_LONG).show()
         sSaveBt.setOnClickListener{
             val mIntent = Intent(this, WritePostActivity::class.java)
             mIntent.putExtra("x",slatLng.latitude)
             mIntent.putExtra("y",slatLng.longitude)
             setResult(Activity.RESULT_OK,mIntent)
             Toast.makeText(this, "위치가 등록되었습니다", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+        sBackBt.setOnClickListener {
             finish()
         }
     }
@@ -62,6 +66,9 @@ class SearchLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         var marker = Marker()
         marker.position = LatLng(37.5670135, 126.9783740)
         marker.map = naverMap
+        marker.icon =  OverlayImage.fromResource(R.drawable.ic_marker)
+        marker.width = 100
+        marker.height = 100
         naverMap.setOnMapClickListener { pointF, latLng ->
             marker.setPosition(latLng)
             slatLng = latLng
