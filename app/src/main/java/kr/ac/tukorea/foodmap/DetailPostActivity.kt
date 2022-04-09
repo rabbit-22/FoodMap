@@ -17,15 +17,23 @@ import kr.ac.tukorea.foodmap.room.PostViewModel
 
 class DetailPostActivity : AppCompatActivity() {
     private lateinit var mPostViewModel:PostViewModel
+    var mapX: Double = 0.0
+    var id : Int = 0
+    var mapY: Double = 0.0
+    var review: String? = null
+    var date: String? = null
+    var placeTitle: String? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_post)
-        val id = intent.getIntExtra("id", 0)
-        val mapX = intent.getDoubleExtra("mapX", 0.0)
-        val mapY = intent.getDoubleExtra("mapY", 0.0)
-        val review = intent.getStringExtra("review")
-        val date = intent.getStringExtra("date")
-        val placeTitle = intent.getStringExtra("placeTitle")
+        id = intent.getIntExtra("id", 0)
+        mapX = intent.getDoubleExtra("mapX", 0.0)
+        mapY = intent.getDoubleExtra("mapY", 0.0)
+        review = intent.getStringExtra("review")
+        date = intent.getStringExtra("date")
+        placeTitle = intent.getStringExtra("placeTitle")
         dPlaceEt.setText(placeTitle.toString())
         dDateTv.setText(date.toString())
         dReviewEt.setText(review.toString())
@@ -53,4 +61,11 @@ class DetailPostActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val placeName = dPlaceEt.text.toString()
+        val review = dReviewEt.text.toString()
+        val updatedPost = Post(id, placeName, review, mapX,mapY,date)
+        mPostViewModel.updatePost(updatedPost)
+    }
 }

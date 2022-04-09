@@ -8,6 +8,7 @@ import android.widget.DatePicker
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_write_post.*
 import kr.ac.tukorea.foodmap.room.Post
@@ -78,4 +79,16 @@ class WritePostActivity : AppCompatActivity() {
         Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show()
     }
 
+    override fun onBackPressed() {
+        var dlgBack = AlertDialog.Builder(this)
+        dlgBack.setMessage("저장되지 않았습니다. 작성중인 글을 취소하시겠습니까?")
+        dlgBack.setPositiveButton("작성취소"){dialog, which ->
+            finish()
+        }
+
+        dlgBack.setNegativeButton("취소"){ dialog, which ->
+            dialog.cancel()
+        }
+        dlgBack.show()
+    }
 }
